@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<stdlib.h>
+#include<stdlib.h> //if you are going to build a program on a linked list then this library is needed include it in your program before anything else
 
 // functions for 1D Array Operations
 void InputElements(int arr[],int n) //function to input the elements inside the array
@@ -346,6 +346,7 @@ void createOne()
                 ptr->next=temp;
         }
 }
+
 void displayOne()
 {
         struct node *ptr;
@@ -425,6 +426,7 @@ void insert_begin()
                 start=temp;
         }
 }
+
 void insert_end()
 {
         struct node *temp,*ptr;
@@ -451,6 +453,7 @@ void insert_end()
                 ptr->next =temp;
         }
 }
+
 void insert_pos()
 {
         struct node *ptr,*temp;
@@ -487,6 +490,7 @@ void insert_pos()
                 ptr->next=temp;
         }
 }
+
 void delete_begin()
 {
         struct node *ptr;
@@ -503,6 +507,7 @@ void delete_begin()
                 free(ptr);
         }
 }
+
 void delete_end()
 {
         struct node *temp,*ptr;
@@ -531,6 +536,7 @@ void delete_end()
                 free(ptr);
         }
 }
+
 void delete_pos()
 {
         int i,pos;
@@ -623,7 +629,7 @@ do{
 printf("\n               MENUE                \n");
 printf("Press 1 to perform 1D Array operations\n");
 printf("Press 2 to perform 2D Array operations\n");
-printf("Press 3 to perform Linked List operations\n");
+printf("Press 3 to perform Singly Linked List operations\n");
 printf("Press 4 to exit program\n");
 scanf("%d", &menue);
 printf("\n");
@@ -885,12 +891,12 @@ printf("\n");
 } while(u<1000); //2D array menue loop closed
 break;
 
-case 3: //here linked list program will come
-printf("\nyou chose Linked List Operation\n");
-printf("\ninitializing Linked List operations program\n");
+case 3: 
+printf("\nyou chose Singly Linked List Operation\n");
+printf("\ninitializing Singly Linked List operations program\n");
 printf("\n");
         do{
-               
+               // menue of Singly Linked List Operation
                 printf("\n                MENU                             \n");
                 printf("\n 1.Create     \n");
                 printf("\n 2.Display    \n");
@@ -948,7 +954,7 @@ printf("\n");
                                         printf("Course: B.Tech\n");
                                         printf("Branch : Computer science\n");
                                         printf("Year : 2nd Year\n");
-                                        printf("Linked List operation program Terminated by the user !!!\n");
+                                        printf("Singly Linked List operation program Terminated by the user !!!\n");
                                         printf("\nSwitching to main menue...\n");
                                         A = 2000;
                                         break;
@@ -957,7 +963,7 @@ printf("\n");
                                         printf("\n Wrong Choice:\n");
                                         break;
                 }
-        } while(A<1000);
+        } while(A<1000);// linked list menue loop closed
 break;
 
 case 4:
