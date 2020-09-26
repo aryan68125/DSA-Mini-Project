@@ -310,7 +310,6 @@ void insert_pos();
 void delete_begin();
 void delete_end();
 void delete_pos();
-void count();
 void reverse();
 
 struct node
@@ -382,7 +381,7 @@ void reverse()
         start = prevnode;
 }
 
-void count()
+int count()
 {
         struct node * ptr;
        ptr = start;
@@ -390,7 +389,8 @@ void count()
        if(start==NULL)
        {
         printf("\nList is Empty\n");
-        return;
+        printf("\n");
+        return 0;
        }
        else
        {
@@ -399,7 +399,7 @@ void count()
         count++;
         ptr = ptr->next;
        }
-       printf("Number of elements in the linkd list is = %d", count);
+       return count;
 }
 
 }
@@ -458,6 +458,8 @@ void insert_pos()
 {
         struct node *ptr,*temp;
         int i,pos;
+        int c; //to store the Number of nodes in the Singly Linked List
+        c=count();
         temp=(struct node *)malloc(sizeof(struct node));
         if(temp==NULL)
         {
@@ -470,10 +472,39 @@ void insert_pos()
         scanf("%d",&temp->info) ;
   
         temp->next=NULL;
-        if(pos==0)
+        if(pos==1)
+        {
+
+                if(start==NULL)
+        {
+                start=temp;
+        }
+        else
         {
                 temp->next=start;
                 start=temp;
+        }
+
+        }
+
+        else if(pos == c)
+        {
+
+            if(start==NULL)
+        {
+                start=temp;
+        }
+
+        else
+        {
+                ptr=start;
+                while(ptr->next !=NULL)
+                {
+                        ptr=ptr->next ;
+                }
+                ptr->next =temp;
+        }
+
         }
         else
         {
@@ -541,6 +572,7 @@ void delete_pos()
 {
         int i,pos;
         struct node *temp,*ptr;
+        int c=count(); //stores the number of node in Singly Linked List
         if(start==NULL)
         {
                 printf("\nThe List is Empty:\n");
@@ -550,17 +582,43 @@ void delete_pos()
         {
                 printf("\nEnter the position of the node to be deleted:\n");
                 scanf("%d",&pos);
-                if(pos==0)
+                if(pos==1)
                 {
                         ptr=start;
                         start=start->next ;
                         printf("\nThe deleted element is:%d\n",ptr->info  );
                         free(ptr);
                 }
+
+               else if(pos==c)
+                {
+                    if(start->next ==NULL)
+                    {
+                       ptr=start;
+                       start=NULL;
+                       printf("\nThe deleted element is:%d\n",ptr->info);
+                       free(ptr);
+                    }
+                    else
+                    {
+                       ptr=start;
+                       while(ptr->next!=NULL)
+                       {
+                        temp=ptr;
+                        ptr=ptr->next;
+                       }
+                        temp->next=NULL;
+                        printf("\nThe deleted element is:%d\n",ptr->info);
+                        free(ptr);
+                    }
+                }    
+
                 else
                 {
                         ptr=start;
-                        for(i=0;i<pos-1;i++) { temp=ptr; ptr=ptr->next ;
+                        for(i=1;i<pos-1;i++) 
+                        { temp=ptr; 
+                          ptr=ptr->next ;
                                 if(ptr==NULL)
                                 {
                                         printf("\nPosition not Found:\n");
@@ -611,6 +669,7 @@ int a[10][10];
 
     int choice ;
  
+ //Menue variable
     int u = 0; //menue loop variable
 
     //variables for main menue loop
@@ -618,9 +677,12 @@ int a[10][10];
 
     int g=0; //variable of main menue loop
 
+//variables of Singly Linked List
     int choose; //choice variable for Linked List Menue
 
     int A; //Loop variable for Linked List
+
+    int c; //to store the number of nodes present in the Singly Linked List
 
 //main menue loop
 do{
@@ -939,7 +1001,9 @@ printf("\n");
                                         delete_pos();
                                         break;
                         case 9:
-                                        count();
+                                        c=count();
+                                        printf("Number of elements in the linkd list is = %d", c);
+                                        printf("\n");
                                         break; 
                         case 10:
                                         reverse();
