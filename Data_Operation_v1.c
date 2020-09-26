@@ -4,10 +4,10 @@
 // functions for 1D Array Operations
 void InputElements(int arr[],int n) //function to input the elements inside the array
 {
-	printf("\nInput the elements inside the array\n");
+    printf("\nInput the elements inside the array\n");
 for(int i=0;i<n;i++)
 {
-	scanf("%d", &arr[i]); //logic to input the array elements
+    scanf("%d", &arr[i]); //logic to input the array elements
 }
 }//InptElements closed
 
@@ -16,20 +16,20 @@ void display(int arr[],int n) //function to traverse the array
 printf("\nPerforming Traversal operation on array\n");
 for(int i=0;i<n;i++)
 {
-	printf("arr[%d] = %d\n",i, arr[i]); //logic to traverse the array elements
+    printf("arr[%d] = %d\n",i, arr[i]); //logic to traverse the array elements
 }
 }//display closed
 
 int Insertion(int arr[], int n, int element, int capacity, int position) //Function to perform insertion operation on the array
 {
-	if(n >= capacity) // condition for insertion
-	{
-		printf("\ncapacity reached ...cannot add anymore element\n");
-		return -1;
-	}
+    if(n >= capacity) // condition for insertion
+    {
+        printf("\ncapacity reached ...cannot add anymore element\n");
+        return -1;
+    }
 for (int i= n-1 ; i>= position; i--) //shifting lements inside the array 
 {
-	arr[i+1]=arr[i];
+    arr[i+1]=arr[i];
 }
 arr[position]=element;//inserting the element in the desired position of the array
 return 1;
@@ -37,18 +37,18 @@ return 1;
 
 int Deletion(int arr[], int n, int position) //function performing deletion operation on the array using the position method
 {
-	if(position<=n)
-	{
-	printf("\nDeleting %d from the array in position %d \n", arr[position], position);
-	for(int i=position; i<n-1; i++)
-	{
+    if(position<=n)
+    {
+    printf("\nDeleting %d from the array in position %d \n", arr[position], position);
+    for(int i=position; i<n-1; i++)
+    {
       arr[i]=arr[i+1];
-	}
+    }
 }
 
 else 
 {
-	printf("\narray position you entered does not hold any data\n");
+    printf("\narray position you entered does not hold any data\n");
 }
 
 printf("\nDeletion complete...\n");
@@ -62,7 +62,7 @@ for(int i =0;i<n;i++)
 {
     if(arr[i]==element)
     {
-    		return i;
+            return i;
     }
 }
 printf("\nLinear search complete\n");
@@ -71,7 +71,7 @@ return -1;
 
 int binarysearch(int arr[],int n, int element, int brr[]) // function to perform binary search the array must be sorted in ascending or desending order
 {
-	int temp=0;//temporary variable for sorting
+    int temp=0;//temporary variable for sorting
 for(int i=0;i<n;i++)
 {
 brr[i] = arr[i];   //loop to copy arr array into brr array
@@ -79,15 +79,15 @@ brr[i] = arr[i];   //loop to copy arr array into brr array
 
 for(int m=0;m<n-1;m++)  //bubble sorting logic in ascending order
 {
-	for(int j=m+1;j<n;j++)
-	{
-		if(brr[j]<brr[m])
-		{
+    for(int j=m+1;j<n;j++)
+    {
+        if(brr[j]<brr[m])
+        {
           temp=brr[m];
           brr[m]=brr[j];
           brr[j]=temp;
-		}
-	}
+        }
+    }
 }
 
 int low,mid,high;
@@ -95,92 +95,92 @@ low=0;
 high=n-1;
 while(low<=high)
 {
-	mid = (low+high)/2;
-	if(brr[mid]==element)
-	{
+    mid = (low+high)/2;
+    if(brr[mid]==element)
+    {
       return element;
       break;
-	}
-	if(brr[mid]<element)
-	{
-		low=mid+1;
-	}
-	else
-	{
-		high=mid-1;
-	}
+    }
+    if(brr[mid]<element)
+    {
+        low=mid+1;
+    }
+    else
+    {
+        high=mid-1;
+    }
 
 }
 printf("\nBinary search complete...\n");
-	return 0;
+    return 0;
 }// binary sort ends
 
 void update(int arr[], int n, int position, int element) //update operation on array
 {
-	if(position<n) //position should be less than equal to number of elements inside the array
-	{
-		arr[position]=element;
-		printf("\nUpdate element in array operation complete...\n");
-	}
-	else
-	{
-		printf("\nUpdate operation unsuccessful\n");
-	}
+    if(position<n) //position should be less than equal to number of elements inside the array
+    {
+        arr[position]=element;
+        printf("\nUpdate element in array operation complete...\n");
+    }
+    else
+    {
+        printf("\nUpdate operation unsuccessful\n");
+    }
 }//Update closed
 
 
 //functions for 2D Array Operations
 int inputa(int a[10][10] , int row, int column)
 {
-	printf("input elements of mairix a\n");
-	for(int i=0;i<row;i++)
-	{
-	for(int j=0;j<column;j++)
-	{
-	scanf("%d", &a[i][j]);
-	}
-	}
-	return 0;
+    printf("input elements of mairix a\n");
+    for(int i=0;i<row;i++)
+    {
+    for(int j=0;j<column;j++)
+    {
+    scanf("%d", &a[i][j]);
+    }
+    }
+    return 0;
 }// inputa closed
 
 int inputb(int b[10][10] , int row, int column)
 {
-	printf("\ninput elements of mairix b\n");
-	for(int i=0;i<row;i++)
-	{
-	for(int j=0;j<column;j++)
-	{
-	scanf("%d", &b[i][j]);
-	}
-	}
-	return 0;
+    printf("\ninput elements of mairix b\n");
+    for(int i=0;i<row;i++)
+    {
+    for(int j=0;j<column;j++)
+    {
+    scanf("%d", &b[i][j]);
+    }
+    }
+    return 0;
 }// inputb closed
 
 int displaya(int a[10][10], int row, int column)
 {
-	printf("\ndisplaying elements of mairix a\n");
-	for(int i=0;i<row;i++)
-	{
-	for(int j=0;j<column;j++)
-	{
-	printf("%d \t\t", a[i][j]);
-	}
-	printf("\n");
+    printf("\ndisplaying elements of mairix a\n");
+    for(int i=0;i<row;i++)
+    {
+    for(int j=0;j<column;j++)
+    {
+    printf("%d \t\t", a[i][j]);
+    }
+    printf("\n");
     }
   return 0;
 } //displaya closed
 
 int displayb(int b[10][10] , int row, int column)
 {
-	printf("\ndisplaying elements of mairix b\n");
-	for(int i=0;i<row;i++)
-	{
-	for(int j=0;j<column;j++)
-	{
-	printf("%d \t\t", b[i][j]);
-	}
-	printf("\n");
-	}
+    printf("\ndisplaying elements of mairix b\n");
+    for(int i=0;i<row;i++)
+    {
+    for(int j=0;j<column;j++)
+    {
+    printf("%d \t\t", b[i][j]);
+    }
+    printf("\n");
+    }
    return 0;
 }//displayb closed
 
@@ -189,19 +189,19 @@ int sumOfTwoArray(int a[10][10] , int b[10][10] , int res[10][10], int row, int 
 
 for(int i=0;i<row;i++)
 {
-	for(int j=0;j<column;j++)
-	{
-		res[i][j]=a[i][j] + b[i][j];
-	}
+    for(int j=0;j<column;j++)
+    {
+        res[i][j]=a[i][j] + b[i][j];
+    }
 }
 
 for(int i=0;i<row;i++)
 {
-	for(int j=0;j<column;j++)
-	{
-		printf("%d \t\t", res[i][j]);
-	}
-	printf("\n");
+    for(int j=0;j<column;j++)
+    {
+        printf("%d \t\t", res[i][j]);
+    }
+    printf("\n");
 }
  return 0;
 } //sumOdTwoArray closed
@@ -211,19 +211,19 @@ int subtractionOfTwoArray(int a[10][10] , int b[10][10] , int res[10][10], int r
 
 for(int i=0;i<row;i++)
 {
-	for(int j=0;j<column;j++)
-	{
-		res[i][j]=a[i][j] - b[i][j];
-	}
+    for(int j=0;j<column;j++)
+    {
+        res[i][j]=a[i][j] - b[i][j];
+    }
 }
 
 for(int i=0;i<row;i++)
 {
-	for(int j=0;j<column;j++)
-	{
-		printf("%d \t\t", res[i][j]);
-	}
-	printf("\n");
+    for(int j=0;j<column;j++)
+    {
+        printf("%d \t\t", res[i][j]);
+    }
+    printf("\n");
 }
  return 0;
 }//subtractionOfTwoArray closed
@@ -232,24 +232,24 @@ int MultiplyTwoArray(int a[10][10] , int b[10][10] , int res[10][10], int row, i
 {
 
     int i, j, k;
-	for(i =0;i<row;i++) //row of matrix a
-	{
-		for(j=0;j<column1;j++) //column of matrix b
-		{
-			for(k=0;k<column;k++) //column of matrix a
-			{
-				res[i][j] += a[i][k] * b[k][j];
-			}
-		}
-	}
+    for(i =0;i<row;i++) //row of matrix a
+    {
+        for(j=0;j<column1;j++) //column of matrix b
+        {
+            for(k=0;k<column;k++) //column of matrix a
+            {
+                res[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
 
-	for(int i=0;i<row;i++) //row of matrix a
+    for(int i=0;i<row;i++) //row of matrix a
 {
-	for(int j=0;j<column1;j++) //column of matrix b
-	{
-		printf("%d \t\t", res[i][j]);
-	}
-	printf("\n");
+    for(int j=0;j<column1;j++) //column of matrix b
+    {
+        printf("%d \t\t", res[i][j]);
+    }
+    printf("\n");
 }
 
 return 0;
@@ -260,20 +260,20 @@ int transposeA(int a[10][10] ,int transA[10][10], int row, int column)
 
 for(int i=0;i<row;i++)
 {
-	for(int j=0;j<column;j++)
-	{
-		transA[j][i] = a[i][j];
-	}
+    for(int j=0;j<column;j++)
+    {
+        transA[j][i] = a[i][j];
+    }
 }
 
 printf("\nTranspose of Matrix A\n");
 for(int i=0;i<column;i++)
 {
-	for(int j=0;j<row;j++)
-	{
-		printf("%d \t\t", transA[i][j]);
-	}
-	printf("\n");
+    for(int j=0;j<row;j++)
+    {
+        printf("%d \t\t", transA[i][j]);
+    }
+    printf("\n");
 }
 return 0;
 }//transposeA closed
@@ -283,20 +283,20 @@ int transposeB(int b[10][10] ,int transB[10][10], int row1, int column1)
 
 for(int i=0;i<row1;i++)
 {
-	for(int j=0;j<column1;j++)
-	{
-		transB[j][i] = b[i][j];
-	}
+    for(int j=0;j<column1;j++)
+    {
+        transB[j][i] = b[i][j];
+    }
 }
 
 printf("\nTranspose of Matrix B\n");
 for(int i=0;i<column1;i++)
 {
-	for(int j=0;j<row1;j++)
-	{
-		printf("%d \t\t", transB[i][j]);
-	}
-	printf("\n");
+    for(int j=0;j<row1;j++)
+    {
+        printf("%d \t\t", transB[i][j]);
+    }
+    printf("\n");
 }
 return 0;
 }//transposeB closed
@@ -477,7 +477,7 @@ void insert_pos()
         }
         else
         {
-                for(i=0,ptr=start;i<pos-1;i++) 
+                for(i=1,ptr=start;i<pos-1;i++) 
                 { 
                         ptr=ptr->next;
                         if(ptr==NULL)
@@ -560,7 +560,7 @@ void delete_pos()
                 else
                 {
                         ptr=start;
-                        for(i=0;i<pos;i++) { temp=ptr; ptr=ptr->next ;
+                        for(i=0;i<pos-1;i++) { temp=ptr; ptr=ptr->next ;
                                 if(ptr==NULL)
                                 {
                                         printf("\nPosition not Found:\n");
@@ -577,11 +577,11 @@ void delete_pos()
 int main()
 {
 //variables related to 1D Array Operations
-	int arr[100]; // declaring array of capacity to hold 100 elements
+    int arr[100]; // declaring array of capacity to hold 100 elements
 
-	int brr[100]; // temporary array for bubble sorting
+    int brr[100]; // temporary array for bubble sorting
 
-	int size ; //number of elements to store inside the array
+    int size ; //number of elements to store inside the array
 
 int ch; //choice in switch statement
 
@@ -597,14 +597,14 @@ int mid; //to hold the mid value returned by binary search function
 
 //variables relayed to 2D Array operations
 int a[10][10];
-	int b[10][10];
+    int b[10][10];
 
-	int res[10][10]; //to store result
-	int transA[10][10]; //to store transpose of matrix A
-	int transB[10][10]; //to store transpose of matrix B
+    int res[10][10]; //to store result
+    int transA[10][10]; //to store transpose of matrix A
+    int transB[10][10]; //to store transpose of matrix B
     
     int row;    //for matrix a
-	int column;
+    int column;
 
     int row1;
     int column1; //for matrix b
@@ -624,8 +624,8 @@ int a[10][10];
 
 //main menue loop
 do{
-	u=0;
-	k=0;
+    u=0;
+    k=0;
 printf("\n               MENUE                \n");
 printf("Press 1 to perform 1D Array operations\n");
 printf("Press 2 to perform 2D Array operations\n");
@@ -671,9 +671,9 @@ break;
 
 case 2:
 printf("\nEnter the element you want to insert inside the array\n");
-	scanf("%d", &element);
-	printf("\nEnter the position at which you want to insert the element inside the array\n");
-	scanf("%d", &position);
+    scanf("%d", &element);
+    printf("\nEnter the position at which you want to insert the element inside the array\n");
+    scanf("%d", &position);
 Insertion(arr,size, element,100, position);
 size++;
 printf("\nsize oh the array is now after insertion = %d\n", size);
@@ -686,16 +686,16 @@ scanf("%d", &element);
 index = LinearSearch(arr,size,element);
 if(index != -1)
 {
-	printf("\n%d is found at position %d in array\n", element,index);
-	printf ("\ndeleting %d from the array\n", element);
-	  Deletion(arr,size, index);
+    printf("\n%d is found at position %d in array\n", element,index);
+    printf ("\ndeleting %d from the array\n", element);
+      Deletion(arr,size, index);
       size--;
       printf("\n");
 }
 else
 {
-	printf("\n%d not present in array\n",element);
-	printf("\n");
+    printf("\n%d not present in array\n",element);
+    printf("\n");
 }
 break;
 
@@ -705,11 +705,11 @@ scanf("%d", &element);
 index = LinearSearch(arr,size,element);
 if(index != -1)
 {
-	printf("\n%d is found at position %d in array\n", element,index);
+    printf("\n%d is found at position %d in array\n", element,index);
 }
 else
 {
-	printf("\n%d not present in array\n",element);
+    printf("\n%d not present in array\n",element);
 }
 printf("\n");
 break;
@@ -720,20 +720,20 @@ scanf("%d", &element);
 mid = binarysearch(arr,size,element,brr);
 if(mid == element)
 {
-	printf("\n%d is present in array\n", element);
+    printf("\n%d is present in array\n", element);
 }
 else
 {
-	printf("\n%d is not present in array\n", element);
+    printf("\n%d is not present in array\n", element);
 }
 printf("\n");
 break;
 
 case 6:
 printf("\nEnter the element you want to insert inside the array\n");
-	scanf("%d", &element);
-	printf("\nEnter the position at which you want to insert the element inside the array\n");
-	scanf("%d", &position);
+    scanf("%d", &element);
+    printf("\nEnter the position at which you want to insert the element inside the array\n");
+    scanf("%d", &position);
 update(arr, size, position, element);
 printf("\n");
 break;
@@ -805,14 +805,14 @@ printf("\n");
     inputb(b , row1, column1);
      printf("\n");
      break;
-	
+    
     case 3:
     printf("\nDisplaying Matrix a\n");
     displaya(a, row, column);
      printf("\n");
      break;
-	
-	 case 4:
+    
+     case 4:
     printf("\nDisplaying Matrix b\n");
     displayb(b , row1, column1);
      printf("\n");
@@ -820,42 +820,42 @@ printf("\n");
      
      case 5:
      if( row == row1 && column == column1)
-	{
-		printf("\nperforming Addition of matrix A and matrix B \n");
-		sumOfTwoArray( a, b, res, row, column);
-	}
-	else 
-	{
-		printf("\nAddition of Matrix A and Matrix B is not possible \n");
-	}
-	printf("\n");
-	break;
+    {
+        printf("\nperforming Addition of matrix A and matrix B \n");
+        sumOfTwoArray( a, b, res, row, column);
+    }
+    else 
+    {
+        printf("\nAddition of Matrix A and Matrix B is not possible \n");
+    }
+    printf("\n");
+    break;
 
     case 6:
      if( row == row1 && column == column1)
-	{
-		printf("\nperforming subtraction of matrix A and matrix B \n");
-		subtractionOfTwoArray( a, b, res, row, column);
-	}
-	else 
-	{
-		printf("\nsubtraction of Matrix A and Matrix B is not possible \n");
-	}
-	printf("\n");
-	break;
+    {
+        printf("\nperforming subtraction of matrix A and matrix B \n");
+        subtractionOfTwoArray( a, b, res, row, column);
+    }
+    else 
+    {
+        printf("\nsubtraction of Matrix A and Matrix B is not possible \n");
+    }
+    printf("\n");
+    break;
 
     case 7:
     // the number of columns in the first matrix must be equal to the number of rows in the second matrix
     if( column == row1)
-	{
-		printf("\nperforming multiplication of matrix A and matrix B \n");
-		MultiplyTwoArray(a , b ,res, row, column, row1, column1);
-	}
-	else 
-	{
-		printf("\nmultiplication of Matrix A and Matrix B is not possible \n");
-	}
-	printf("\n");
+    {
+        printf("\nperforming multiplication of matrix A and matrix B \n");
+        MultiplyTwoArray(a , b ,res, row, column, row1, column1);
+    }
+    else 
+    {
+        printf("\nmultiplication of Matrix A and Matrix B is not possible \n");
+    }
+    printf("\n");
     break;
 
     case 8:
@@ -876,17 +876,17 @@ printf("Stream:- Computer science\n");
 printf("\n");
     break;
 
-	case 11:
-	printf("\n2D Array Operations Program Terminated by the user!!!...\n");
-	printf("\nSwitching to main menue...\n");
+    case 11:
+    printf("\n2D Array Operations Program Terminated by the user!!!...\n");
+    printf("\nSwitching to main menue...\n");
     printf("\n");
-	u=2000;
-	break;
+    u=2000;
+    break;
 
-	default:
-	printf("\nWrong choice...Please try again!!!\n");
-	printf("\n");
-	break;
+    default:
+    printf("\nWrong choice...Please try again!!!\n");
+    printf("\n");
+    break;
 }
 } while(u<1000); //2D array menue loop closed
 break;
@@ -989,5 +989,5 @@ break;
 
 }while(g<1000);//main menue loop closed
 
-	return 0;
+    return 0;
 }//main closed
