@@ -616,7 +616,7 @@ void delete_pos()
                 else
                 {
                         ptr=start;
-                        for(i=1;i<pos-1;i++) 
+                        for(i=0;i<pos-1;i++) 
                         { temp=ptr; 
                           ptr=ptr->next ;
                                 if(ptr==NULL)
@@ -630,6 +630,316 @@ void delete_pos()
                         free(ptr);
                 }
         }
+}
+
+//Functions of Doubly Linked List
+void create_DoublyLinkedList();
+ void Display_DoublyLinkedList();
+ void Insert_begin__DoublyLinkedList();
+ void Insert_End__DoublyLinkedList();
+ void Insert_Pos__DoublyLinkedList();
+ void Delete_Begin_DoublyLinkedList();
+ void Delete_End_DoublyLinkedList();
+ void Delete_POS_DoublyLinkedList();
+
+ struct node_two
+ {
+    int info_two;
+    struct node_two* next_two;
+    struct node_two* prev_two;
+};
+struct node_two *start_two = NULL;
+struct node_two *tail_two = NULL;
+
+void create_DoublyLinkedList()
+{
+    struct node_two *ptr_two;
+    struct node_two *temp_two;
+    temp_two= (struct node_two*)malloc(sizeof(struct node_two));
+    if(temp_two == NULL)
+    {
+        printf("Out of memory \n");
+    }
+
+    printf("Enter the data in newly created node\n");
+    scanf("%d",&temp_two->info_two);
+    temp_two->next_two=NULL;
+    temp_two->prev_two=NULL;
+    printf("\n");
+
+    if(start_two==NULL)
+    {
+        start_two = temp_two;
+        tail_two = temp_two;
+    }
+    else
+    {   
+        tail_two->next_two=temp_two;
+        temp_two->prev_two=tail_two;
+        tail_two=temp_two;
+    }
+}
+
+void Display_DoublyLinkedList()
+{
+    struct node_two *ptr_two;
+    if(start_two == NULL)
+    {
+        printf("The Doubly Linked List is Empity\n");
+        printf("\n");
+    }
+    else
+    {
+        ptr_two=start_two;
+        while(ptr_two!=NULL)
+        {
+            printf("%d\n",ptr_two->info_two);
+            ptr_two=ptr_two->next_two;
+        }
+
+    }
+}
+
+void Insert_begin__DoublyLinkedList()
+{
+struct node_two *temp_two;
+temp_two = (struct node_two*)malloc(sizeof(struct node_two));
+if(temp_two==NULL)
+{
+    printf("Out of memory\n");
+}
+
+printf("Enter the data in newly created node\n");
+    scanf("%d",&temp_two->info_two);
+    temp_two->next_two=NULL;
+    temp_two->prev_two=NULL;
+printf("Inserting the newly created node at the beginning of the Doubly Linked list\n");
+    printf("\n");
+
+    if(start_two==NULL)
+    {
+        start_two = temp_two;
+        tail_two = temp_two;
+    }
+    else
+    {   
+        temp_two->next_two=start_two;
+        start_two->prev_two=temp_two;
+        start_two=temp_two;
+    }
+
+}
+
+void Insert_End__DoublyLinkedList()
+{
+struct node_two *temp_two;
+temp_two = (struct node_two*)malloc(sizeof(struct node_two));
+if(temp_two==NULL)
+{
+    printf("Out of memory\n");
+}
+
+printf("Enter the data in newly created node\n");
+    scanf("%d",&temp_two->info_two);
+    temp_two->next_two=NULL;
+    temp_two->prev_two=NULL;
+    printf("Inserting the newly created node at the ending of the Doubly Linked list\n");
+    printf("\n");
+
+    if(start_two==NULL)
+    {
+        start_two = temp_two;
+        tail_two = temp_two;
+    }
+    else
+    {   
+        tail_two->next_two=temp_two;
+        temp_two->prev_two=tail_two;
+        tail_two=temp_two;
+    }
+
+}
+
+int lengthDoublyLinkedList()
+{
+struct node_two *ptr_two;
+int count=0;
+if(start_two==NULL)
+{
+    printf("The Doubly Linked List is Empity\n");
+        printf("\n");
+    return 0;
+}
+else
+{
+    ptr_two=start_two;
+    while(ptr_two!=NULL)
+    {
+        count++;
+        ptr_two=ptr_two->next_two;
+    }
+    return count;
+}
+}
+
+void Insert_Pos__DoublyLinkedList()
+{
+struct node_two *temp_two;
+struct node_two *ptr_two;
+int i; //loop variable
+int pos; //position at which the newly created node is tobe inserted
+int c; //stores the number of nodes in a doubly linked list
+temp_two = (struct node_two*)malloc(sizeof(struct node_two));
+c=lengthDoublyLinkedList();
+
+if(temp_two==NULL)
+{
+    printf("Out of memory\n");
+}
+
+printf("Enter the position at which the newly created node is to be inserted\n");
+scanf("%d",&pos);
+printf("Enter the data in newly created node\n");
+    scanf("%d",&temp_two->info_two);
+    temp_two->next_two=NULL;
+    temp_two->prev_two=NULL;
+printf("Inserting the newly created node at the position specified by the user in the Doubly Linked list\n");
+    printf("\n");
+
+if(pos < 1 || pos > c)
+{
+    printf("Invalid Position Entered by the user\n");
+    printf("\n");
+}
+else if(pos == 1)
+{
+    if(start_two==NULL)
+    {
+        start_two = temp_two;
+        tail_two = temp_two;
+    }
+    else
+    {   
+        temp_two->next_two=start_two;
+        start_two->prev_two=temp_two;
+        start_two=temp_two;
+    }
+}
+else if(pos==c)
+{
+    if(start_two==NULL)
+    {
+        start_two = temp_two;
+        tail_two = temp_two;
+    }
+    else
+    {   
+        tail_two->next_two=temp_two;
+        temp_two->prev_two=tail_two;
+        tail_two=temp_two;
+    }
+}
+else
+{
+    ptr_two = start_two;
+    for(i=1;i<pos-1;i++)
+    {
+        ptr_two=ptr_two->next_two;
+    }
+    temp_two->prev_two=ptr_two;
+    temp_two->next_two=ptr_two->next_two;
+    ptr_two->next_two=temp_two;
+    temp_two->next_two->prev_two=temp_two;
+}
+
+}
+
+void Delete_Begin_DoublyLinkedList()
+{
+    struct node_two* ptr_two; //ptr pointer
+    if(start_two==NULL)
+    {
+        printf("The Doubly Linked List is Empity\n");
+        printf("\n");
+    }
+    else
+    {
+        ptr_two=start_two;
+        start_two=start_two->next_two;
+        start_two->prev_two=NULL;
+        ptr_two->next_two=NULL;
+        free(ptr_two);
+    }
+}
+
+void Delete_End_DoublyLinkedList()
+{
+    struct node_two* ptr_two; //ptr pointer
+    if(start_two==NULL)
+    {
+        printf("The Doubly Linked List is Empity\n");
+        printf("\n");
+    }
+    else
+    {
+        ptr_two=tail_two;
+        tail_two=tail_two->prev_two;
+        tail_two->next_two=NULL;
+        ptr_two->prev_two=NULL;
+        free(ptr_two);
+    }
+}
+
+void Delete_POS_DoublyLinkedList()
+{
+ struct node_two* ptr_two; //ptr pointer
+ int i; //while loop variable
+ int c; // variable to store the length of a doubly linked list
+ c=lengthDoublyLinkedList();
+ int pos; //position of the node that you want to delete
+ printf("Enter the position of the node that you want to delete from the doubly Linked List\n");
+ scanf("%d",&pos);
+ printf("\n");
+    if(start_two==NULL)
+    {
+        printf("The Doubly Linked List is Empity\n");
+        printf("\n");
+    }
+    if(pos <1 || pos >c)
+    {
+        printf("The Position entered by the user is Invalid\n");
+        printf("\n");
+    }
+    else if(pos==1)  //logic of deleting first node
+    {
+        ptr_two=start_two;
+        start_two=start_two->next_two;
+        start_two->prev_two=NULL;
+        ptr_two->next_two=NULL;
+        free(ptr_two);
+    }
+    else if(pos==c) //logic for deletion at the end
+    {
+        ptr_two=tail_two;
+        tail_two=tail_two->prev_two;
+        tail_two->next_two=NULL;
+        ptr_two->prev_two=NULL;
+        free(ptr_two);
+    }
+    else
+    {
+        ptr_two=start_two;
+        while(i<pos-1)
+        {
+            ptr_two=ptr_two->next_two;
+            i++;
+        }
+        ptr_two->prev_two->next_two=ptr_two->next_two;
+        ptr_two->next_two->prev_two=ptr_two->prev_two;
+        ptr_two->next_two=NULL;
+        ptr_two->prev_two=NULL;
+        free(ptr_two);
+    }
 }
 
 int main()
@@ -684,6 +994,11 @@ int a[10][10];
 
     int c; //to store the number of nodes present in the Singly Linked List
 
+//variables of Doubly Linked List
+    int T=0; //menue variable of the doubly linked list
+    int c2=0; //to store the number of nodes in a doubly linked list
+    int choice3; //menue choice variable for doubly linked list menue
+
 //main menue loop
 do{
     u=0;
@@ -692,7 +1007,8 @@ printf("\n               MENUE                \n");
 printf("Press 1 to perform 1D Array operations\n");
 printf("Press 2 to perform 2D Array operations\n");
 printf("Press 3 to perform Singly Linked List operations\n");
-printf("Press 4 to exit program\n");
+printf("Press 4 to perform Doubly Linked List operations\n");
+printf("Press 5 to exit program\n");
 scanf("%d", &menue);
 printf("\n");
 switch(menue)
@@ -1030,7 +1346,106 @@ printf("\n");
         } while(A<1000);// linked list menue loop closed
 break;
 
+case 4: // menue loop of Doubly Linked List
+printf("\nyou chose Doubly Linked List Operation\n");
+printf("\ninitializing Doubly Linked List operations program\n");
+printf("\n");
+do
+{
+printf("-----------------------MENUE----------------------\n");
+printf("Press 1 to create a node in Doubly Linked List\n");
+printf("Press 2 to display all the nodes of Doubly Linked List\n");
+printf("Press 3 to Insert the newly created node at the beginning of the Doubly Linked list\n");
+printf("Press 4 to Insert the newly created node at the ending of the Doubly Linked list\n");
+printf("Press 5 to Insert the newly created node at the specific position Entered by the user in the Doubly Linked list\n");
+printf("Press 6 to count the number of nodes of the Doubly Linked list\n");
+printf("Press 7 to delete the First node of the Doubly Linked list\n");
+printf("Press 8 to delete the Last node of the Doubly Linked list\n");
+printf("Press 9 to delete the node of the Doubly Linked list at a specified position\n");
+printf("Press 10 to terminate the program\n");
+scanf("%d",&choice3);
+printf("\n");
+switch(choice3)
+{
+case 1:
+printf("Creating a new node in Doubly Linked List\n");
+create_DoublyLinkedList();
+printf("\n");
+break;
+
+case 2:
+printf("Printing the nodes in Doubly Linked List\n");
+Display_DoublyLinkedList();
+printf("\n");
+break;
+
+case 3:
+Insert_begin__DoublyLinkedList();
+printf("Insertion at beginning complete!!!..");
+printf("\n");
+break;
+
 case 4:
+Insert_End__DoublyLinkedList();
+printf("Insertion at ending complete!!!..");
+printf("\n");
+break;
+
+case 5:
+Insert_Pos__DoublyLinkedList();
+printf("Insertion at the specified position complete!!!..");
+printf("\n");
+break;
+
+case 6:
+c2=lengthDoublyLinkedList();
+printf("The number of nodes present inside the Doubly linked list is = %d\n", c2);
+printf("\n");
+break;
+
+case 7:
+Delete_Begin_DoublyLinkedList();
+printf("Deletion at beginning complete!!!..");
+printf("\n");
+break;
+
+case 8:
+Delete_End_DoublyLinkedList();
+printf("Deletion at Ending complete!!!..");
+printf("\n");
+break;
+
+case 9:
+Delete_POS_DoublyLinkedList();
+printf("Deletion at the specified position complete!!!..");
+printf("\n");
+break;
+
+case 10:
+printf("---------DEVELOPER INFO-------------\n");
+printf("NAME: Aditya Kumar\n");
+printf("COURSE: B.Tech\n");
+printf("BRANCH: Computer Science\n");
+printf("ROLL NO: 1901230100001\n");
+printf("COLLEGE CODE: 123\n");
+printf("College Name: Saroj Institute of Technology and Management\n");
+printf("\nDoubly Linked List Program terminated by the user\n");
+printf("\nswitching to main menue...\n");
+printf("\n");
+T=3000;
+break;
+
+default:
+printf("Wrong choice\n");
+printf("\n");
+break;
+
+}
+
+}while(T<2000);
+break;
+
+case 5:
 printf("This piece of program was written by\n");
 printf("Name : Aditya Kumar\n");
 printf("Roll number : 1901230100001\n");
