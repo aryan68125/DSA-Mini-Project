@@ -16,6 +16,8 @@ void miniArray();
 void sumArray();
 void AvgArray();
 void setArray();
+void ReverseArray();
+void rotateArray();
 
 //in order to create an Array inside the heap we need to first create a Structure 
 struct Array // structure name
@@ -93,7 +95,7 @@ int i; //loop variable
 printf("printing the elements entered by the user inside the Array\n");
     for(int i=0;i<arr.length;i++)
     {
-        printf("%d\n",arr.A[i]);
+        printf("A[%d] = %d\n",i,arr.A[i]);
     }
 }
 
@@ -407,7 +409,48 @@ void setArray() //it will replace the elements at a desired position in the arra
     printf("the Entered position is not valid\n");
     printf("setting up number %d inside the array FAILED!!!!....\n",num);
    }
-} //1D array operation functions end here
+} 
+
+void ReverseArray() //this function will reverse the elements inside the array and then save it inside the original array
+{
+    temp.B=(int*)malloc(arr.size*sizeof(int)); //creating temporary array inside the heap
+    // now while accessing the members we should use -> method becoz now we are using *temp instead of temp
+    temp.lengthB=arr.length;
+    int j = arr.length; //it will store the length of the array
+                        //by doing that we will be able to get the last position of the element in the array
+    for(int i=0;i<arr.length;i++)
+    {
+        temp.B[j-1]=arr.A[i]; //copying the elements inside the temporary array in reverse order
+        j--;
+    }
+    for(int i=0;i<arr.length;i++)
+    {
+        arr.A[i]=temp.B[i]; //copying the temp array inside the original array A 
+    }
+    printf("elements Reversal inside the array is Successful!!!...\n");
+}
+
+void rotateArray() //this function will rotate the elements inside the array
+{
+
+   int tempo; //temporary variable that will hold the element inside the array at 0th position temporaily
+              //as in this operation we will be shifting the elements inside the array forward by one position
+              //and in doing so we will loose the first element so inorder to prevent it. It is crucial to take the backup of the first element inside the array
+   tempo = arr.A[0];
+   int j;
+   for(int i=0;i<arr.length;i++)
+   {
+    j=i+1;
+    arr.A[i] = arr.A[j];    //logic for shifting of elements inside the array forward by one position
+    j++;
+   }
+
+   arr.A[arr.length-1]=tempo; //now copying the element that used to be at the 0th positon in the array to the last position in the array
+   printf("Rotation of array elements SUCESSFUL!!!!!.....\n");
+
+}
+
+//1D array operation functions end here
 
 
 //functions for 2D Array Operations
@@ -582,7 +625,7 @@ for(int i=0;i<column1;i++)
 return 0;
 }//transposeB closed
 
-//functions of Linked List operation
+//.......................functions of Singly Linked List operation........................
 void createOne();
 void displayOne();
 void insert_begin();
@@ -592,6 +635,7 @@ void delete_begin();
 void delete_end();
 void delete_pos();
 void reverse();
+void SumOfAllSinglyLL();
 
 struct node
 {
@@ -682,6 +726,27 @@ int count()
        }
        return count;
 }
+
+}
+
+void SumOfAllSinglyLL()
+{
+   int sum; //to store the sum of all the elements present inside the Linked List
+   struct node *ptr;
+   ptr = start;
+   if(start == NULL)
+   {
+    printf("\nList is empty\n");
+   }
+   else
+   {
+    while(ptr!=NULL)
+    {
+      sum = sum + ptr->info;
+      ptr=ptr->next;
+    }
+   }
+   printf("Sum of all the elements present inside the Singly Linked List is %d\n",sum);
 
 }
 
@@ -911,7 +976,9 @@ void delete_pos()
                         free(ptr);
                 }
         }
-}
+} 
+
+//singly Linked List Ends here..........................................................
 
 //Functions of Doubly Linked List
 void create_DoublyLinkedList();
@@ -1316,7 +1383,9 @@ int key; //choice for menue switch case
     printf("Press 10 to Print the sum of all the elements present inside the array\n");
     printf("Press 11 to find the average of all the elements present inside the array\n");
     printf("Press 12 to Replace a number inside the array at a desired position\n");
-    printf("Press 13 to Exit the program\n");
+    printf("Press 13 to Reverse the elements inside the array\n");
+    printf("Press 14 to Rotate the elements inside the array\n");
+    printf("Press 15 to Exit the program\n");
     scanf("%d",&key);
     printf("\n");
     switch(key)
@@ -1369,6 +1438,14 @@ int key; //choice for menue switch case
         printf("\n");
         break;
         case 13:
+        ReverseArray();
+        printf("\n");
+        break;
+        case 14:
+        rotateArray();
+        printf("\n");
+        break;
+        case 15:
         printf("------------------------Developer info----------------------\n");
         printf("Name:- Aditya Kumar\n");
         printf("Course:-B.Tech CS\n");
@@ -1535,7 +1612,8 @@ printf("\n");
                 printf("\n 8.Delete from specified position     \n");
                 printf("\n 9.To see the number of elements inside the Linked list     \n");
                 printf("\n 10.Reverse the linked list     \n");
-                printf("\n 11.Exit       \n");
+                printf("\n 11.Sum of All the elements\n");
+                printf("\n 12.Exit       \n");
                 printf("\n--------------------------------------\n");
                 printf("\nEnter your choice:\n");
                 scanf("%d",&choose);
@@ -1572,9 +1650,12 @@ printf("\n");
                                         break; 
                         case 10:
                                         reverse();
-                                        break;               
-                        
+                                        break;     
                         case 11:
+                                        SumOfAllSinglyLL();
+                                        break;          
+                        
+                        case 12:
                                         printf("This piece of program was written by\n");
                                         printf("Name : Aditya Kumar\n");
                                         printf("Roll number : 1901230100001\n");
