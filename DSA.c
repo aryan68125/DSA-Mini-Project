@@ -4,166 +4,208 @@
 // functions for 1D Array Operations
 //The 1D array is created in heap instead of the stack
 //this will allow us to enter the size of the array during runtime
+
 void createArray();
 void displayArray();
-void AppendArray();
+void sortArrayAcending();
+void sortArrayDecending();
+void insertAscendSort();
+void insertDescendSort();
 void insertArray();
-void deleteArray();
-void LinearSearchArray();
-void BinarySearchArray();
-void maxArray();
-void miniArray();
-void sumArray();
-void AvgArray();
-void setArray();
-void ReverseArray();
 void rotateArray();
+void ReverseArray();
+void setArray();
+void AvgArray();
+void sumArray();
+void miniArray();
+void maxArray();
+void BinarySearchArray();
+void LinearSearchArray();
+void deleteArray();
 
-//in order to create an Array inside the heap we need to first create a Structure 
-struct Array // structure name
-{
-    int *A; // Array pointer. it is integer type it can point on an Array
-    int size; //size of an array that we will enter during run time
-    int length; // to store the length of an array i.e: Number of elements that the user wants to enter inside the array
-};
+int *arr;
+int size;
+int length;
 
-//this array is temporary array created in heap so that we can perform binary search without have to worry about whether its sorted or not
-struct Temp
-{
-    int *B; //Array pointer pointing to array b which is a temporary array
-    int sizeB; //size of array B
-    int lengthB; //length of array B
-};
-
-//declaring the arr globally will allow us to access it in any function in this program
-struct Array arr; /* Initializing the structure (struct Array is not a pointer so we will access the structure members by the use of dot operation)
-                         Example 1. arr.length ; 2. arr.A[i] ; 3. arr.size
-                         if we take arr as a pointer for example struct Array *arr then we will get error messages like :- format specifies type 'int *' but the argument has type 'int' [-Wformat]
-                         scanf("%d",arr->A[i]);
-                         arr->A method of accessing structure members is only applicable if the structure is a pointer struct Array *arr */
-
-//now setting up the array b which is a temporary array that will be used to perform binary search
-    struct Temp temp; //this array will be identical in size and length to  the original array
-                       //the temp should be a pointer *temp becoz we are required to modify the array b
+int *brr;
+int lengthb;
 
 void createArray() //containing the logic for creaton of array with ability to enter the size dynamically during runtime
 {
-    int n; //n will hold the number of elements that the user wants to insert inside the array
-    int i; // Loop variable
 
-    //all the steps here are required for array initialization inside the heap with dinamic memory allocation so that we can enter the size of an array during runtime
-    //which allows us to choose the size of an array according to our needs during run time
-    
-    printf("Enter the size of an array and also the number of elements you want to enter inside the array\n");
-    scanf("%d\n",&arr.size); //entering the size of an Array in runtime
-                              // we can only access the struct members using arr there is no other way to do that
-    scanf("%d",&n);    // Entering the number of elements the user want to enter inside the array
-    arr.A=(int*)malloc(arr.size*sizeof(int)); //created an array inside the heap and making pointer *A point on that array
-    arr.length=0; //setting length to zero beacause there are no elements inside array right now
-    //........................................................................................................................
+printf("Enter the size of an array\n");
+scanf("%d",&size);
+printf("Enter the number of elements you want to insert in the array\n");
+scanf("%d",&length);
+arr=(int*)malloc(size*sizeof(int));  //main array
+brr=(int*)malloc(size*sizeof(int)); //temporary array
+lengthb=length;
+if (length<=size)
+{
+printf("Enter the elements inside the array\n");
+for(int i=0;i<length;i++)
+{
+  scanf("%d",&arr[i]);
+}
 
-    if(n<=arr.size)
-    {
-        printf("The capacity of array is %d\n",arr.size);
-        printf("The number of elements user wants to enter inside the array is %d\n",n);
-        //the code below will eneter the elements inside the array
-        // by using for loop we will enter the elements inside the array one by one
-       printf("Enter the elements inside the Array\n");
-       for(i=0;i<n;i++)
-       {
-        scanf("%d",&arr.A[i]);
-       }
-        //setting up the length of an array as n after entering the elements inside the array
-        arr.length=n;
-        printf("Array creation Successfull..........\n");
-    }
-    else
-    {
-        printf("The number of elements enetered by the user Exceeds the capacity of the Array\n");
-        printf("The capacity of array is %d\n",arr.size);
-        printf("The number of elements user wants to enter inside the array is %d\n",n);
-        printf("Array creation failed..........\n");
-        return;
-    }
-   //........................................................................................................................
+int free = size - length;
+printf("Free space in array is %d\n",free);
+}
+if(length>size)
+{
+    printf("Array creation Failed!!!!\n");
+    printf("Number of elements you want to enter is more than the size of the array\n");
+    printf("array size =%d\n", size);
+    printf("number of elements to be entered inside the array = %d\n",length);
+}
 }
 
 void displayArray() //display Array function
 {
-int i; //loop variable
-//now printing the elements entered by the user inside the Array by using for loop again
-printf("printing the elements entered by the user inside the Array\n");
-    for(int i=0;i<arr.length;i++)
-    {
-        printf("A[%d] = %d\n",i,arr.A[i]);
-    }
+
+printf("Printing the array elements\n");
+for(int i=0;i<length;i++)
+{
+  printf("A[%d] = %d\n",i,arr[i]);
 }
 
-void AppendArray()//this Append funtion will insert the element at the end of the array i.e the next free space inside the array
-{
-    int num; //the number that the user want to append inside the array
-    printf("Enter the element that you want to Append inside the array\n");
-    scanf("%d",&num);
-    if(arr.length!=arr.size)
-    {
-      arr.A[arr.length]= num;
-      printf("the appending of %d inside the array is Successfull!!!!.....\n",num);
-      arr.length++; //updating the length of the array
-      printf("The number of elements inside the array is %d\n",arr.length);
-      int free; //it will store the free space present inside the array to store new elements
-      free = arr.size - arr.length;
-      printf("Available space inside the array for new element is %d\n",free);
-      return;
-    }
-    else
-    {
-        printf("Cannot Append the new element %d inside the array because there is no free space\n", num);
-        printf("Maximum array capacity reached!!!!...\n");
-        printf("Array Capacity = %d\n",arr.size);
-        return;
-    }
+}
 
+void sortArrayAcending()
+{
+  int temp;
+  for(int i=0;i<length-1;i++)
+  {
+    for(int j=i+1;j<length;j++)
+    {
+      if(arr[j]<arr[i]) //sorting array in ascending order
+      {
+               temp=arr[i];
+               arr[i]=arr[j];
+               arr[j]=temp;
+      }
+    }
+  }
+  printf("Sorting in ascending order complete!\n");
+}
+
+void sortArrayDecending()
+{
+  int temp;
+  for(int i=0;i<length-1;i++)
+  {
+    for(int j=i+1;j<length;j++)
+    {
+      if(arr[j]>arr[i]) //sorting array in descending order
+      {
+               temp=arr[i];
+               arr[i]=arr[j];
+               arr[j]=temp;
+      }
+    }
+  }
+  printf("Sorting in descending order complete!\n");
+}
+
+void insertAscendSort() //this function will only insert the element if the array is sorted in ascending order
+{
+  int num;
+  printf("Use this option only after you sort the array in ascending order!!!!\n");
+  printf("Enter the number you want to enter inside the sorted array\n");
+  scanf("%d",&num);
+  int i= length-1;
+  if(length == size)
+  {
+    printf("there is no free space in the array\n");
+    printf("Insertion failed!!!!\n");
+  }
+  else
+  {
+        while(i>=0 && arr[i]>num) //shifting elements inside the array to create free space for the new element
+        {
+          arr[i+1]=arr[i];
+          i--;
+        }
+        arr[i+1]=num; //inserting the element inside the free space created after shifting
+        length++;
+        int free=size-length;
+        printf("Free space in array is %d \n",free);
+
+  }
+  int free = size - length;
+  printf("Insertion without distortion Successful\n");
+  printf("free space left inside the array = %d\n",free);
+}
+
+void insertDescendSort() //this function will only insert the element if the array is sorted in descending order
+{
+  int num;
+  printf("Use this option only after you sort the array in descending order!!!!\n");
+  printf("Enter the number you want to enter inside the sorted array\n");
+  scanf("%d",&num);
+  int i= length-1;
+  if(length == size)
+  {
+    printf("there is no free space in the array\n");
+    printf("Insertion failed!!!!\n");
+  }
+  else
+  {
+        while(i>=0 && arr[i]<num) //shifting elements inside the array to create free space for the new element
+        {
+          arr[i+1]=arr[i];
+          i--;
+        }
+        arr[i+1]=num; //inserting the element inside the free space created after shifting
+        length++;
+        int free=size-length;
+        printf("Free space in array is %d \n",free);
+
+  }
+  int free = size - length;
+  printf("Insertion without distortion Successful\n");
+  printf("free space left inside the array = %d\n",free);
 }
 
 void insertArray() //this function will insert the element inside the array at the position givent by the user
 {
 
-    int pos; //it will hold the position at which we want to insert the element inside the array
-    int i; //loop variable
-    int num; //the element you want to insert inside of an array
-    int free; //it will store the free space present inside the array to store new elements
-    printf("Enter the element you want to insert inside of the array\n");
-    scanf("%d",&num);
-    printf("Enter the position at which you want to insert the element in the array\n");
-    scanf("%d",&pos);
-    printf("You want to enter element %d at position %d in the array\n",num,pos);
-    if(pos>arr.size)
+  int pos; //it will hold the position at which we want to insert the element inside the array
+  int i; //loop variable
+  int num; //the element you want to insert inside of an array
+  int free; //it will store the free space present inside the array to store new elements
+  printf("Enter the element you want to insert inside of the array\n");
+  scanf("%d",&num);
+  printf("Enter the position at which you want to insert the element in the array\n");
+  scanf("%d",&pos);
+  printf("You want to enter element %d at position %d in the array\n",num,pos);
+    if(pos>size)
     {
-        printf("The desired position %d does not exist in the array......\n",pos);
-        printf("Insertion of element %d FAILED!!!!!......\n",num);
-        return;
+      printf("The desired position %d does not exist in the array......\n",pos);
+      printf("Insertion of element %d FAILED!!!!!......\n",num);
+      return;
     }
 
-    if(arr.length!=arr.size)
+    if(length!=size)
     {
-         for(i=arr.length;i>pos;i--)
+         for(i=length;i>pos;i--)
          {
-            arr.A[i]=arr.A[i-1]; //it will shift the elements from the last to the desired position by one index
+          arr[i]=arr[i-1]; //it will shift the elements from the last to the desired position by one index
          }
-         arr.A[pos]=num; //Inserting the element inside the desired position of the array after shifting all the elements of the array 
-         arr.length++; //updating the length of the array
+         arr[pos]=num; //Inserting the element inside the desired position of the array after shifting all the elements of the array 
+         length++; //updating the length of the array
          printf("Insertion of element %d is Successfull!!!!!!!!........\n",num);
          
-         free = arr.size - arr.length; //calculation of free space present inside of an array
-         printf("Available space inside the array for new element is %d\n",free);
-         return;
+       free = size - length; //calculation of free space present inside of an array
+       printf("Available space inside the array for new element is %d\n",free);
+       return;
     }
     else
     {
-        printf("Cannot Insert the new element %d inside the array because there is no free space\n", num);
-        printf("Maximum array capacity reached!!!!...\n");
-        printf("Array Capacity = %d\n",arr.size);
-        return;
+      printf("Cannot Insert the new element %d inside the array because there is no free space\n", num);
+      printf("Maximum array capacity reached!!!!...\n");
+      printf("Array Capacity = %d\n",size);
+      return;
     }
 }
 
@@ -180,12 +222,12 @@ void deleteArray() //this function will delete the element from the array
    scanf("%d",&num);
 
    printf("Searching for %d in the array....\n", num);
-   for(i=0;i<arr.length;i++)
+   for(i=0;i<length;i++)
    {
-    if(num==arr.A[i])
+    if(num==arr[i])
     {  
-        tr=1;
-        break;
+      tr=1;
+      break;
     }
    }
 
@@ -195,16 +237,16 @@ void deleteArray() //this function will delete the element from the array
     printf("Deleting element %d from position %d in the array........\n",num,i);
     //Applying linear search operation in the array in order to find the element and delete it from the array
    //Linear search is applied here becoz it works on sorted or unsorted array
-    for(j=i;j<arr.length-1;j++)
+    for(j=i;j<length-1;j++)
     {
-        arr.A[j]=arr.A[j+1]; //it will shift the elements from the last to the desired position by one index
+      arr[j]=arr[j+1]; //it will shift the elements from the last to the desired position by one index
     }
-    arr.length--; //updating array length
-    free = arr.size - arr.length; //calculation of free space present inside of an array
+    length--; //updating array length
+    free = size - length; //calculation of free space present inside of an array
     printf("Available space inside the array for new element is %d\n",free);
     printf("Deletion operation successfull!!!!!!!!!.........\n");
    }
-   else if(arr.length==0)
+   else if(length==0)
    {
     printf("The array is empty........\n");
    }
@@ -217,18 +259,18 @@ void deleteArray() //this function will delete the element from the array
 
 void LinearSearchArray()
 {
-    int num; //number that you want to search
-    int i; //Linear search loop variable
-    int tr=0; //boolean variable
-    printf("Enter the number that you want to search inside the array\n");
-    scanf("%d",&num);
-    printf("Searching for %d in the array....\n", num);
-   for(i=0;i<arr.length;i++)
+  int num; //number that you want to search
+  int i; //Linear search loop variable
+  int tr=0; //boolean variable
+  printf("Enter the number that you want to search inside the array\n");
+  scanf("%d",&num);
+  printf("Searching for %d in the array....\n", num);
+   for(i=0;i<length;i++)
    {
-    if(num==arr.A[i])
+    if(num==arr[i])
     {  
-        tr=1; //boolean variable
-        break;
+      tr=1; //boolean variable
+      break;
     }
    }
    if(tr==1)
@@ -245,148 +287,122 @@ void LinearSearchArray()
 
 void BinarySearchArray()
 {
-    int num; //number that you want to search inside the array
+  int num; //number that you want to search inside the array
 
     printf("Enter the number that you want to search inside the array\n");
     scanf("%d",&num);
 
-    temp.B=(int*)malloc(arr.size*sizeof(int)); //creating temporary array inside the heap
-    // now while accessing the members we should use -> method becoz now we are using *temp instead of temp
-    temp.lengthB=arr.length;
-
-    for(int i=0;i<arr.length;i++)
+  for(int i=0;i<length;i++)
+  {
+    brr[i]=arr[i]; //copying the elements from a array to b array
+  }
+  int tempo; // temporary variable that is used in swapping of elements
+  for(int i=1;i<lengthb;i++)  //Bubble sorting the temporary array in ascending order
+  {
+    for(int j=0;j<lengthb-1;j++)
     {
-        temp.B[i]=arr.A[i]; //copying the elements from a array to b array
+      if(brr[j]>brr[i]) //this logic will sort the array in ascending order
+      {// swapping logic 
+        tempo=brr[j];
+        brr[j]=brr[i];
+        brr[i]=tempo;
+      }
     }
-    int tempo; // temporary variable that is used in swapping of elements
-    for(int i=1;i<temp.lengthB;i++)  //Bubble sorting the temporary array in ascending order
-    {
-        for(int j=0;j<temp.lengthB-1;j++)
-        {
-            if(temp.B[j]>temp.B[i]) //this logic will sort the array in ascending order
-            {// swapping logic 
-                tempo=temp.B[j];
-                temp.B[j]=temp.B[i];
-                temp.B[i]=tempo;
-            }
-        }
-    }
+  }
 
     //printing the sorted array 
     printf("Sorting the array before performing binary search.......\n");
-    for(int i=0;i<temp.lengthB;i++)
+    for(int i=0;i<lengthb;i++)
     {
-        printf("%d\n",temp.B[i]);
+      printf("%d\n",brr[i]);
     }
     
-    //now we can apply binary search on the temporary array 
-    int low=0; //lower bound
-    int high=temp.lengthB; //higher bound
-    int mid;
-    int key; //key will store mid if the num is found inside the array
-    while (low<=high) // condition for the loop
-    {
+  //now we can apply binary search on the temporary array 
+  int low=0; //lower bound
+  int high=lengthb; //higher bound
+  int mid;
+  int key; //key will store mid if the num is found inside the array
+  while (low<=high) // condition for the loop
+  {
         mid = (low+high)/2;
-        if(num == temp.B[mid])
+        if(num == brr[mid])
         {
-            key=temp.B[mid];
-            break;
+          key=brr[mid];
+          break;
         }
-        else if(num<temp.B[mid])
+        else if(num<brr[mid])
         {
-            high=mid-1;
+          high=mid-1;
         }
         else
         {
-            low=mid+1;
+          low=mid+1;
         }
-    }
+  }
 
-    if(key==num)
-    {
+  if(key==num)
+  {
         printf("The element %d is found in array\n",num);
         printf("Binary search Successfull!!!!.....\n");
     }
     else 
     {
-        printf("The element %d is not present in the array\n",num);
-        printf("Binary Search FAILED!!!!!.....\n");
+      printf("The element %d is not present in the array\n",num);
+      printf("Binary Search FAILED!!!!!.....\n");
     }
 }
 
 void maxArray() // to find th max value in the array
 {
-temp.B=(int*)malloc(arr.size*sizeof(int)); //creating temporary array inside the heap
-    // now while accessing the members we should use -> method becoz now we are using *temp instead of temp
-    temp.lengthB=arr.length;
 
-    for(int i=0;i<arr.length;i++)
+   int minimum = -32768;  //minimum value supported by integer data type
+   for(int i=0;i<length;i++)
+   {
+    if (arr[i]>minimum)
     {
-        temp.B[i]=arr.A[i]; //copying the elements from a array to b array
+
+         minimum = arr[i];
+
     }
-    int tempo; // temporary variable that is used in swapping of elements
-    for(int i=1;i<temp.lengthB;i++)  //Bubble sorting the temporary array in ascending order
-    {
-        for(int j=0;j<temp.lengthB-1;j++)
-        {
-            if(temp.B[j]>temp.B[i]) //this logic will sort the array in ascending order
-            {// swapping logic 
-                tempo=temp.B[j];
-                temp.B[j]=temp.B[i];
-                temp.B[i]=tempo;
-            }
-        }
-    }
-    int last=temp.lengthB;
-    printf("Maximum value in array is %d\n",temp.B[last-1]);
+   }
+   printf("Maximum value present inside the array is = %d\n",minimum);
+  
 }
 
 void miniArray() //to find the minimum value in the array
 {
-    temp.B=(int*)malloc(arr.size*sizeof(int)); //creating temporary array inside the heap
-    // now while accessing the members we should use -> method becoz now we are using *temp instead of temp
-    temp.lengthB=arr.length;
+  int maximum = 32768;  //minimum value supported by integer data type
+   for(int i=0;i<length;i++)
+   {
+    if (arr[i]<maximum)
+    {
 
-    for(int i=0;i<arr.length;i++)
-    {
-        temp.B[i]=arr.A[i]; //copying the elements from a array to b array
+         maximum = arr[i];
+
     }
-    int tempo; // temporary variable that is used in swapping of elements
-    for(int i=1;i<temp.lengthB;i++)  //Bubble sorting the temporary array in ascending order
-    {
-        for(int j=0;j<temp.lengthB-1;j++)
-        {
-            if(temp.B[j]>temp.B[i]) //this logic will sort the array in ascending order
-            {// swapping logic 
-                tempo=temp.B[j];
-                temp.B[j]=temp.B[i];
-                temp.B[i]=tempo;
-            }
-        }
-    }
-    int last=temp.lengthB;
-    printf("Minimum value in array is %d\n",temp.B[0]);
+   }
+   printf("Maximum value present inside the array is = %d\n",maximum);
 }
 
 void sumArray() //it will find the sum of all elements present inside the array
 {
-    int sum; //for storing the sum of all the elements present inside thae array
-   for(int i=0;i<arr.length;i++)
+  int sum; //for storing the sum of all the elements present inside thae array
+   for(int i=0;i<length;i++)
    {
-       sum=sum+arr.A[i];
+       sum=sum+arr[i];
    }
    printf("Sum of all the elements present in the array is %d\n",sum);
 }
 
 void AvgArray() //it will find the average of all the elements present inside the array
 {
-    int sum; //for storing the sum of all the elements present inside thae array
-   for(int i=0;i<arr.length;i++)
+  int sum; //for storing the sum of all the elements present inside thae array
+   for(int i=0;i<length;i++)
    {
-       sum=sum+arr.A[i];
+       sum=sum+arr[i];
    }
    int avg;
-   avg= sum/arr.length;
+   avg= sum/length;
    printf("The average of all the elements present inside the array is %d\n",avg);
 }
 
@@ -398,34 +414,32 @@ void setArray() //it will replace the elements at a desired position in the arra
    scanf("%d",&num);
    printf("Enter the position at which you want to set the number in the array\n");
    scanf("%d",&pos);
-   if(pos>0 && pos<=arr.length) //Logic to check whether the position entered by the user is valid or not
+   if(pos>0 && pos<=length) //Logic to check whether the position entered by the user is valid or not
    {
     printf("the Entered position is Valid......\n");
     printf("setting the %d inside the array at %d position\n",num,pos);
-    arr.A[pos-1]=num;
+    arr[pos-1]=num;
    }
    else
    {
     printf("the Entered position is not valid\n");
     printf("setting up number %d inside the array FAILED!!!!....\n",num);
    }
-} 
+}
 
 void ReverseArray() //this function will reverse the elements inside the array and then save it inside the original array
 {
-    temp.B=(int*)malloc(arr.size*sizeof(int)); //creating temporary array inside the heap
-    // now while accessing the members we should use -> method becoz now we are using *temp instead of temp
-    temp.lengthB=arr.length;
-    int j = arr.length; //it will store the length of the array
-                        //by doing that we will be able to get the last position of the element in the array
-    for(int i=0;i<arr.length;i++)
+  
+  int j = length; //it will store the length of the array
+                      //by doing that we will be able to get the last position of the element in the array
+  for(int i=0;i<length;i++)
+  {
+    brr[j-1]=arr[i]; //copying the elements inside the temporary array in reverse order
+    j--;
+  }
+    for(int i=0;i<length;i++)
     {
-        temp.B[j-1]=arr.A[i]; //copying the elements inside the temporary array in reverse order
-        j--;
-    }
-    for(int i=0;i<arr.length;i++)
-    {
-        arr.A[i]=temp.B[i]; //copying the temp array inside the original array A 
+      arr[i]=brr[i]; //copying the temp array inside the original array A 
     }
     printf("elements Reversal inside the array is Successful!!!...\n");
 }
@@ -436,16 +450,16 @@ void rotateArray() //this function will rotate the elements inside the array
    int tempo; //temporary variable that will hold the element inside the array at 0th position temporaily
               //as in this operation we will be shifting the elements inside the array forward by one position
               //and in doing so we will loose the first element so inorder to prevent it. It is crucial to take the backup of the first element inside the array
-   tempo = arr.A[0];
+   tempo = arr[0];
    int j;
-   for(int i=0;i<arr.length;i++)
+   for(int i=0;i<length;i++)
    {
     j=i+1;
-    arr.A[i] = arr.A[j];    //logic for shifting of elements inside the array forward by one position
+    arr[i] = arr[j];    //logic for shifting of elements inside the array forward by one position
     j++;
    }
 
-   arr.A[arr.length-1]=tempo; //now copying the element that used to be at the 0th positon in the array to the last position in the array
+   arr[length-1]=tempo; //now copying the element that used to be at the 0th positon in the array to the last position in the array
    printf("Rotation of array elements SUCESSFUL!!!!!.....\n");
 
 }
@@ -636,6 +650,8 @@ void delete_end();
 void delete_pos();
 void reverse();
 void SumOfAllSinglyLL();
+void GreatestSinglyLinkedList();
+void SmallestSinglyLinkedList();
 
 struct node
 {
@@ -748,6 +764,54 @@ void SumOfAllSinglyLL()
    }
    printf("Sum of all the elements present inside the Singly Linked List is %d\n",sum);
 
+}
+
+void GreatestSinglyLinkedList()
+{
+   int max = -32768; //-32768 is the minimum integer value that is there in int data type
+                     //we will compare all the elements inside the linked list with this max variable to find out the maximum value present inside the linked list
+   struct node *ptr;
+   ptr=start;
+   if(start==NULL)
+   {
+    printf("\nList is empity\n");
+   }
+   else
+   {
+    while(ptr!=NULL)
+    {
+      if(ptr->info>max)
+      {
+        max=ptr->info;
+      }
+      ptr=ptr->next;
+    }
+   }
+   printf("The maximum value present inside the Linked List is %d\n",max);
+}
+
+void SmallestSinglyLinkedList()
+{
+   int mini = 32768; //32768 is the max integer value that is there in int data type
+                     //we will compare all the elements inside the linked list with this mini variable to find out the minimum value present inside the linked list
+   struct node *ptr;
+   ptr=start;
+   if(start==NULL)
+   {
+    printf("\nList is empity\n");
+   }
+   else
+   {
+    while(ptr!=NULL)
+    {
+      if(ptr->info<mini)
+      {
+        mini=ptr->info;
+      }
+      ptr=ptr->next;
+    }
+   }
+   printf("The minimum value present inside the Linked List is %d\n",mini);
 }
 
 void insert_begin()
@@ -1293,23 +1357,8 @@ void Delete_POS_DoublyLinkedList()
 int main()
 {
 //variables related to 1D Array Operations
-    int arr[100]; // declaring array of capacity to hold 100 elements
-
-    int brr[100]; // temporary array for bubble sorting
-
-    int size ; //number of elements to store inside the array
-
-int ch; //choice in switch statement
-
-int k=1; //menue loop variable
-
-int element; //element to be inserted inside the array
-
-int position; //define the position at which you want to insert the element
-
-int index; //index of array where the element is found in linear search
-
-int mid; //to hold the mid value returned by binary search function
+    int key; //choice for menue switch case
+  int O=0; // menue loop variable
 
 //variables relayed to 2D Array operations
 int a[10][10];
@@ -1349,8 +1398,7 @@ int a[10][10];
 
 //main menue loop
 do{
-    u=0;
-    k=0;
+    
 printf("\n               MENUE                \n");
 printf("Press 1 to perform 1D Array operations\n");
 printf("Press 2 to perform 2D Array operations\n");
@@ -1366,105 +1414,121 @@ printf("you chose 1D Array operations \n");
 printf("initializing 1D Array operations program\n");
 printf("\n");
 // menue loop for 1D Array
-int key; //choice for menue switch case
-    int O=0; // menue loop variable
-    do
-    {
+//....................................................................................
+  
+  do
+  {
     printf("---------------------------Menue--------------------------------\n");
     printf("Press 1 to Create the Array\n");
     printf("Press 2 to Display the Array\n");
-    printf("Press 3 to Append the number inside the array\n");
-    printf("Press 4 to Insert the element at the desired position inside the Array\n");
-    printf("Press 5 to Delete the element from the array\n");
-    printf("Press 6 to Find the element using Linear Searching method in the array\n");
-    printf("Press 7 to Find the element using Binary Searching method in the array\n");
-    printf("Press 8 to Find the maximum value present inside the array\n");
-    printf("Press 9 to find the minimum value present inside the array\n");
-    printf("Press 10 to Print the sum of all the elements present inside the array\n");
-    printf("Press 11 to find the average of all the elements present inside the array\n");
-    printf("Press 12 to Replace a number inside the array at a desired position\n");
-    printf("Press 13 to Reverse the elements inside the array\n");
-    printf("Press 14 to Rotate the elements inside the array\n");
-    printf("Press 15 to Exit the program\n");
+    printf("Press 3 to sort the array in ascending array\n");
+    printf("Press 4 to sort the array in descending array\n");
+    printf("Press 5 to insert the element inside the sorted array in ascending without distorting the element sequence\n");
+    printf("Press 6 to insert the element inside the sorted array in descending without distorting the element sequence\n");
+    printf("Press 7 to insert the element inside the array in a user defined position\n");
+    printf("Press 8 to delete an element from the array\n");
+    printf("Press 9 to perform linear search on the array\n");
+    printf("Press 10 to perform binary search on the array\n");
+    printf("Press 11 to find the maximum value present inside the array\n");
+    printf("Press 12 to find the minimum value present inside the array\n");
+    printf("Press 13 to print the sum of all the elements present inside the array\n");
+    printf("Press 14 to print the average of all the elements present inside the array\n");
+    printf("Press 15 to replace the element in a user defined position inside an array\n");
+    printf("Press 16 to reverse the sequence of elements inside the array \n");
+    printf("Press 17 to rotate the elements inside the array\n");
+    printf("Press 18 to Exit the program\n");
     scanf("%d",&key);
     printf("\n");
     switch(key)
     {
-        case 1:
-        createArray(); //create array
-        printf("\n");
-        break;
-        case 2:
-        displayArray(); //display elements in array
-        printf("\n");
-        break;
-        case 3:
-        AppendArray(); //Append elements in array
-        printf("\n");
-        break;
-        case 4:
-        insertArray(); //Insert elements in array
-        printf("\n");
-        break;
-        case 5:
-        deleteArray(); //delete elements in array
-        printf("\n");
-        break;
-        case 6:
-        LinearSearchArray(); //Linear search in array
-        printf("\n");
-        break;
-        case 7:
-        BinarySearchArray(); //Binary search in array
-        break;
-        case 8:
-        maxArray();
-        printf("\n");
-        break;
-        case 9:
-        miniArray();
-        printf("\n");
-        break;
-        case 10:
-        sumArray();
-        printf("\n");
-        break;
-        case 11:
-        AvgArray();
-        printf("\n");
-        break;
-        case 12:
-        setArray();
-        printf("\n");
-        break;
-        case 13:
-        ReverseArray();
-        printf("\n");
-        break;
-        case 14:
-        rotateArray();
-        printf("\n");
-        break;
-        case 15:
-        printf("------------------------Developer info----------------------\n");
-        printf("Name:- Aditya Kumar\n");
-        printf("Course:-B.Tech CS\n");
-        printf("Year:-2nd tear\n");
-        printf("Roll Number:-1901230100001\n");
-        printf("college code:-123\n");
-        printf("\n");
-        printf("Program terminated by the user........\n");
-        printf("Switchig to main menue................\n");
-        O=4000;
-        printf("\n");
-        break;
-        default:
-        printf("wrong choice\n");
-        printf("\n");
-        break;
-    }//switch closed
+      case 1:
+      createArray(); //create array
+      printf("\n");
+      break;
+      case 2:
+      displayArray(); //display elements in array
+      printf("\n");
+      break;
+      case 3:
+      sortArrayAcending();
+      printf("\n");
+      break;
+      case 4:
+      sortArrayDecending();
+      printf("\n");
+      break;
+      case 5:
+      insertAscendSort();
+      printf("\n");
+      break;
+      case 6:
+      insertDescendSort();
+      printf("\n");
+      break;
+      case 7:
+      insertArray();
+      printf("\n");
+      break;
+      case 8:
+      deleteArray();
+      printf("\n");
+      break;
+      case 9:
+      LinearSearchArray();
+      printf("\n");
+      break;
+      case 10:
+      BinarySearchArray();
+      printf("\n");
+      break;
+      case 11:
+      maxArray();
+      printf("\n");
+      break;
+      case 12:
+      miniArray();
+      printf("\n");
+      break;
+      case 13:
+      sumArray();
+      printf("\n");
+      break;
+      case 14:
+      AvgArray();
+      printf("\n");
+      break;
+      case 15:
+      setArray();
+      printf("\n");
+      break;
+      case 16:
+      ReverseArray();
+      printf("\n");
+      break;
+      case 17:
+      rotateArray();
+      printf("\n");
+      break;
+      case 18:
+      printf("------------------------Developer info----------------------\n");
+      printf("Name:- Aditya Kumar\n");
+      printf("Course:-B.Tech CS\n");
+      printf("Year:-2nd tear\n");
+      printf("Roll Number:-1901230100001\n");
+      printf("college code:-123\n");
+      printf("\n");
+      printf("Program terminated by the user........\n");
+      O=4000;
+      printf("\n");
+      break;
+      default:
+      printf("wrong choice\n");
+      printf("\n");
+      break;
+    }
 
-    }while(O<3000); //do while loop closed
+  }while(O<3000);
+
 break;
 
 case 2:
@@ -1613,7 +1677,9 @@ printf("\n");
                 printf("\n 9.To see the number of elements inside the Linked list     \n");
                 printf("\n 10.Reverse the linked list     \n");
                 printf("\n 11.Sum of All the elements\n");
-                printf("\n 12.Exit       \n");
+                printf("\n 12.Find the greates number\n");
+                printf("\n 13.Find the smallest number\n");
+                printf("\n 14.Exit       \n");
                 printf("\n--------------------------------------\n");
                 printf("\nEnter your choice:\n");
                 scanf("%d",&choose);
@@ -1653,9 +1719,17 @@ printf("\n");
                                         break;     
                         case 11:
                                         SumOfAllSinglyLL();
-                                        break;          
+                                        break;   
+                        case 12:       
+                                        GreatestSinglyLinkedList();
+                                        printf("\n");
+                                        break;    
+                        case 13:     
+                                        SmallestSinglyLinkedList();
+                                        printf("\n");
+                                        break;   
                         
-                        case 12:
+                        case 14:
                                         printf("This piece of program was written by\n");
                                         printf("Name : Aditya Kumar\n");
                                         printf("Roll number : 1901230100001\n");
