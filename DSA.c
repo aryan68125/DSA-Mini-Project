@@ -923,6 +923,9 @@ void reverse();
 void SumOfAllSinglyLL();
 void GreatestSinglyLinkedList();
 void SmallestSinglyLinkedList();
+void serchingOne();
+void sortSinglyLinkedListAcending();
+void sortSinglyLinkedListDecending();
 
 struct node
 {
@@ -976,6 +979,99 @@ void displayOne()
                         ptr=ptr->next ;
                 }
         }
+}
+
+void serchingOne()
+{
+    
+    struct node *ptr;
+    ptr=start;
+    if(start==NULL)
+    {
+        printf("Singly linked List is Empity\n");
+    }
+    int num; //number that you want to search indie a Singly Linked List
+    int key=0;//boolean variable for true or false flase =0 and true is 1
+    printf("Enter the number that you want to search for inside a Singly Linked List\n");
+    scanf("%d",&num);
+    while(ptr!=NULL)
+    {
+        if(num == ptr->info)
+        {
+            key = 1;
+            break;
+        }
+        ptr = ptr->next;
+    }
+    if (key == 1)
+    {
+        printf("the %d is stored in Memory Address %d inside the Linked List\n", num,(int)ptr);
+    }
+    else 
+    {
+        printf("%d not found inside the Linked List\n",num );
+    }
+
+}
+
+void sortSinglyLinkedListAcending()
+{
+    struct node *ptr1;
+    struct node *ptr2;
+    ptr1=start;
+    int temp;
+    if(start==NULL)
+    {
+        printf("Singly Linked List is empty\n");
+    }
+    while(ptr1!=NULL)
+    {
+        ptr2=ptr1->next;
+        while(ptr2!=NULL)
+        {
+            if(ptr1->info>ptr2->info)
+            {
+              temp=ptr1->info;
+             ptr1->info=ptr2->info;
+             ptr2->info=temp;
+            }
+            ptr2=ptr2->next;
+        }
+        ptr1=ptr1->next;
+    }
+
+    printf("Sorting in ascending order complete!!!\n"); 
+
+}
+
+void sortSinglyLinkedListDecending()
+{
+    struct node *ptr1;
+    struct node *ptr2;
+    ptr1=start;
+    int temp;
+    if(start==NULL)
+    {
+        printf("Singly Linked List is empty\n");
+    }
+    while(ptr1!=NULL)
+    {
+        ptr2=ptr1->next;
+        while(ptr2!=NULL)
+        {
+            if(ptr1->info<ptr2->info)
+            {
+              temp=ptr1->info;
+             ptr1->info=ptr2->info;
+             ptr2->info=temp;
+            }
+            ptr2=ptr2->next;
+        }
+        ptr1=ptr1->next;
+    }
+
+    printf("Sorting in descending order complete!!!\n"); 
+
 }
 
 void reverse()
@@ -1632,6 +1728,7 @@ int main()
     int O=0; // menue loop variable
     int choice15;//choice variable for menue of Binary operations on array
     int Q=0;//do while loop variable for 
+
 //variables relayed to 2D Array operations
 int a[10][10];
     int b[10][10];
@@ -2018,7 +2115,10 @@ printf("\n");
                 printf("\n 11.Sum of All the elements\n");
                 printf("\n 12.Find the greates number\n");
                 printf("\n 13.Find the smallest number\n");
-                printf("\n 14.Exit       \n");
+                printf("\n 14.Search a number inside Singly Linked List\n");
+                printf("\n 15.sort elements in Ascending order\n");
+                printf("\n 16.sort elements in descending order\n");
+                printf("\n 17.Exit       \n");
                 printf("\n--------------------------------------\n");
                 printf("\nEnter your choice:\n");
                 scanf("%d",&choose);
@@ -2066,9 +2166,21 @@ printf("\n");
                         case 13:     
                                         SmallestSinglyLinkedList();
                                         printf("\n");
-                                        break;   
+                                        break;  
+                        case 14:        
+                                        serchingOne();
+                                        printf("\n");
+                                        break; 
+
+                        case 15:
+                                        sortSinglyLinkedListAcending();
+                                        break;
+
+                        case 16:
+                                        sortSinglyLinkedListDecending();
+                                        break;
                         
-                        case 14:
+                        case 17:
                                         printf("This piece of program was written by\n");
                                         printf("Name : Aditya Kumar\n");
                                         printf("Roll number : 1901230100001\n");
