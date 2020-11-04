@@ -926,6 +926,8 @@ void SmallestSinglyLinkedList();
 void serchingOne();
 void sortSinglyLinkedListAcending();
 void sortSinglyLinkedListDecending();
+void InsertAscending();
+void InsertDescending();
 
 struct node
 {
@@ -940,7 +942,7 @@ void createOne()
         temp=(struct node *)malloc(sizeof(struct node));
         if(temp==NULL)
         {
-                printf("nOut of Memory Space:\n");
+                printf("Out of Memory Space:\n");
                 exit(0);
         }
         printf("\nEnter the data value for the node:\n");
@@ -1409,9 +1411,93 @@ void delete_pos()
         }
 } 
 
+void InsertAscending() //this function will insert an element inside the linked list sorted in ascending order
+{
+    struct node* ptr1;  //pointer 1
+    struct node* ptr2;  //pointer 2
+    struct node* temp;  //new node
+    temp = (struct node*)malloc(sizeof(struct node));
+    temp->next=NULL;
+    printf("Enter the value inside the new node\n");
+    scanf("%d",&temp->info);
+    if(temp == NULL)
+    {
+        printf("Out of Memory space\n");
+    }
+    ptr2=start;
+    ptr1=ptr2->next;
+     if (ptr2==start)
+    {
+        if(ptr2->info > temp->info)
+        {
+            temp->next=start;
+            start=temp;
+        }
+    }
+    while(ptr1!=NULL)
+    {
+        
+        if(ptr1->info<temp->info) //Insertion at ascending order
+        {
+            ptr2=ptr2->next;
+            ptr1=ptr2->next;
+        }
+        else
+        {
+            break;
+        }
+    }
+    temp->next=ptr1;
+    ptr2->next=temp;
+    printf("Instertion at ascending order successfull!!\n");
+
+}
+
+void InsertDescending() //this function will insert an element inside the linked list sorted in descending order
+{
+    struct node* ptr1;  //pointer 1
+    struct node* ptr2;  //pointer 2
+    struct node* temp;  //new node
+    temp = (struct node*)malloc(sizeof(struct node));
+    temp->next=NULL;
+    printf("Enter the value inside the new node\n");
+    scanf("%d",&temp->info);
+    if(temp == NULL)
+    {
+        printf("Out of Memory space\n");
+    }
+    ptr2=start;
+    ptr1=ptr2->next;
+    if (ptr2==start)
+    {
+        if(ptr2->info < temp->info)
+        {
+            temp->next=start;
+            start=temp;
+        }
+    }
+    while(ptr1!=NULL)
+    {
+        
+        if(ptr1->info>temp->info) //Insertion at descending order
+        {
+            ptr2=ptr2->next;
+            ptr1=ptr2->next;
+        }
+        else
+        {
+            break;
+        }
+    }
+    temp->next=ptr1;
+    ptr2->next=temp;
+    printf("Instertion at descending order successfull!!\n");
+
+}
+
 //singly Linked List Ends here..........................................................
 
-//Functions of Doubly Linked List
+//................................Functions of Doubly Linked List.......................
 void create_DoublyLinkedList();
  void Display_DoublyLinkedList();
  void Insert_begin__DoublyLinkedList();
@@ -1420,6 +1506,7 @@ void create_DoublyLinkedList();
  void Delete_Begin_DoublyLinkedList();
  void Delete_End_DoublyLinkedList();
  void Delete_POS_DoublyLinkedList();
+ void reverseDoublyLL();
 
  struct node_two
  {
@@ -1720,6 +1807,31 @@ void Delete_POS_DoublyLinkedList()
         free(ptr_two);
     }
 }
+
+void reverseDoublyLL()
+{
+    struct node_two *ptr;
+    ptr=start_two;
+    if(start==NULL)
+    {
+      printf("Doubly Linked List is empty\n");
+    }
+    struct node_two *temp;
+    while(ptr!=NULL)
+    {
+        temp=ptr->next_two;
+        ptr->next_two=ptr->prev_two;
+        ptr->prev_two=temp;
+        ptr=ptr->prev_two;
+        if(ptr!=NULL && ptr->next_two==NULL)
+        {
+          start_two=ptr;
+        }
+    }
+
+}
+
+//......................Doubly Linked List ends here........................
 
 int main()
 {
@@ -2118,7 +2230,9 @@ printf("\n");
                 printf("\n 14.Search a number inside Singly Linked List\n");
                 printf("\n 15.sort elements in Ascending order\n");
                 printf("\n 16.sort elements in descending order\n");
-                printf("\n 17.Exit       \n");
+                printf("\n 17.Insert an node at a Linked List sorted in Ascending order\n");
+                printf("\n 18.Insert an node at a Linked List sorted in Descending order\n");
+                printf("\n 19.Exit       \n");
                 printf("\n--------------------------------------\n");
                 printf("\nEnter your choice:\n");
                 scanf("%d",&choose);
@@ -2179,8 +2293,17 @@ printf("\n");
                         case 16:
                                         sortSinglyLinkedListDecending();
                                         break;
-                        
                         case 17:
+                                        InsertAscending();
+                                        printf("\n");
+                                        break;
+
+                        case 18:
+                                        InsertDescending();
+                                        printf("\n");
+                                        break;
+                        
+                        case 19:
                                         printf("This piece of program was written by\n");
                                         printf("Name : Aditya Kumar\n");
                                         printf("Roll number : 1901230100001\n");
@@ -2217,7 +2340,8 @@ printf("Press 6 to count the number of nodes of the Doubly Linked list\n");
 printf("Press 7 to delete the First node of the Doubly Linked list\n");
 printf("Press 8 to delete the Last node of the Doubly Linked list\n");
 printf("Press 9 to delete the node of the Doubly Linked list at a specified position\n");
-printf("Press 10 to terminate the program\n");
+printf("Press 10 to Reverse the elements inside the doubly linked list\n");
+printf("Press 11 to terminate the program\n");
 scanf("%d",&choice3);
 printf("\n");
 switch(choice3)
@@ -2277,6 +2401,12 @@ printf("\n");
 break;
 
 case 10:
+reverseDoublyLL();
+printf("Reversal of Doubly Linked List is Complete!!!!!......\n");
+printf("\n");
+break;
+
+case 11:
 printf("---------DEVELOPER INFO-------------\n");
 printf("NAME: Aditya Kumar\n");
 printf("COURSE: B.Tech\n");
