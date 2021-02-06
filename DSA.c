@@ -2032,6 +2032,86 @@ int isBalanced()
 
 //..............STACK USING LINKED LIST ENDS HERE..............................
 
+//...............Queue using linked list starts here...........................
+
+//creating a stucture for a linked list
+struct QueueLL // here struct QueueLL =  struct node
+{
+	int infoQueue;    // int infoQueue will hold the integer value inside the linked list
+	struct QueueLL *nextQueue; // struct QueueLL *nextQueue; = struct node *next;
+};
+struct QueueLL *startQueue=NULL; //struct QueueLL *startQueue = struct node *start;
+
+/*
+this function is used to enter elements inside the queue
+*/
+void enqueueLL()
+{
+	struct QueueLL *temp,*ptr; //temp is the new node in the liked list and ptr is the pointer which will be used for traversal of the likned list
+	temp = (struct QueueLL*)malloc(sizeof(struct QueueLL)); //allocating memory for the new node of the linked list
+    if(temp == NULL)
+    {
+    	printf("\nQueue is full\n");
+    }
+    printf("Enter the elements in the queue\n");
+    scanf("%d",&temp->infoQueue);
+    temp->nextQueue=NULL;
+    if(startQueue==NULL)
+    {
+    	startQueue=temp;
+    }
+    else
+    {
+    	ptr = startQueue;
+    	while(ptr->nextQueue!=NULL)
+    	{
+    		ptr=ptr->nextQueue;
+    	}
+    	ptr->nextQueue=temp;
+    }
+}
+
+//this function will delete the element from the beginning of the linked list
+//this is cruesial so that we can follow the First in First out policy of the Queue data structure
+void dequeueLL()
+{
+	   struct QueueLL *ptr;
+        if(startQueue==NULL)
+        {
+                printf("\nQueue is Empty!!!!.....\n");
+                return;
+        }
+        else
+        {
+                ptr=startQueue;
+                startQueue=startQueue->nextQueue ;
+                printf("\ndeleting elements from the Queue!!!!!!.....%d\n",ptr->infoQueue);
+                free(ptr);
+        }
+}
+
+void displayQueue()
+{
+	struct QueueLL *ptr;
+        if(startQueue==NULL)
+        {
+                printf("\nQueue is Empty\n");
+                return;
+        }
+        else
+        {
+                ptr=startQueue;
+                printf("\nElements in the stack is :-\n");
+                while(ptr!=NULL)
+                {
+                        printf("%d\n",ptr->infoQueue );
+                        ptr=ptr->nextQueue ;
+                }
+        }
+}
+
+//...............Queue using linked list ends here.............................
+
 
 int main()
 {
@@ -2085,6 +2165,10 @@ int a[10][10];
     int Balanced;
     int choice10;
 
+    //variables for the Queue using Linked list is here
+    int choiceQueue=0;
+    int q=0;
+
 //main menue loop
 do{
     
@@ -2094,7 +2178,8 @@ printf("Press 2 to perform 2D Array operations\n");
 printf("Press 3 to perform Singly Linked List operations\n");
 printf("Press 4 to perform Doubly Linked List operations\n");
 printf("Press 5 to perform stack operations\n");
-printf("Press 6 to exit program\n");
+printf("Press 6 to perform Queue operations\n");
+printf("Press 7 to exit program\n");
 scanf("%d", &menue);
 printf("\n");
 switch(menue)
@@ -2735,6 +2820,49 @@ case 5:
 break;
 
 case 6:
+        while(q<5000){
+               
+                printf("\n                QUEUE USING LINKED LIST MENU                             \n");
+                printf("\n 1.enQueue (insert element in the queue)   \n");
+                printf("\n 2.Display elements in queue    \n");
+                printf("\n 3.deQueue (delete elements from the queue)   \n");
+                printf("\n 4.Exit       \n");
+                printf("\n--------------------------------------\n");
+                printf("\nEnter your choice:\n");
+                scanf("%d", &choiceQueue);
+                switch(choiceQueue)
+                {
+                        case 1:
+                                        enqueueLL();
+                                        break;
+                        case 2:
+                                        displayQueue();
+                                        break; 
+                        case 3:
+                                        dequeueLL();
+                                        break;    
+                        
+                        case 4:
+                                        printf("This piece of program was written by\n");
+                                        printf("Name : Aditya Kumar\n");
+                                        printf("Roll number : 1901230100001\n");
+                                        printf("College code: 123\n");
+                                        printf("College Name : SITM\n");
+                                        printf("Course: B.Tech\n");
+                                        printf("Branch : Computer science\n");
+                                        printf("Year : 2nd Year\n");
+                                        printf("Thank you for using my program ....Bye\n");
+                                        q=5400;
+                                        break;
+                             
+                        default:
+                                        printf("\n Wrong Choice:\n");
+                                        break;
+                                        }
+                                    }
+break;
+
+case 7:
 printf("This piece of program was written by\n");
 printf("Name : Aditya Kumar\n");
 printf("Roll number : 1901230100001\n");
